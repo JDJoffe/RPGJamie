@@ -5,7 +5,8 @@ using System.Collections;
 public class Interact : MonoBehaviour
 {
     #region Variables
-
+    public QuestGoal questGoal;
+    public Quest goal;
     #endregion
     #region Start
     //connect our player to the player variable via tag
@@ -57,7 +58,11 @@ public class Interact : MonoBehaviour
                 {
                     //Debug that we hit an item
                     Debug.Log("Item");
-                   
+                    if (hitInfo.collider.name.Equals("DSGame"))
+                    {
+                        questGoal.ObjectCollected();
+                        Debug.Log("complete");
+                    }
                    
                 }
                 #endregion

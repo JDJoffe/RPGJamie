@@ -8,6 +8,7 @@ public class Dialogue : MonoBehaviour
     public string[] dialogueTxt;
     public Vector2 screen;
     public int dialogueNum, optionsNum;
+    public QuestGiver questGiver;
     // Use this for initialization
     void Start()
     {
@@ -40,6 +41,7 @@ public class Dialogue : MonoBehaviour
                 if (GUI.Button(new Rect(15 * screen.x, 8.5f * screen.y, screen.x, 0.5f * screen.y), "Next"))
                 {
                     dialogueNum++;
+                    questGiver.OpenQuestWindow();
                 }
             }
             else if (dialogueNum == optionsNum)
@@ -47,10 +49,13 @@ public class Dialogue : MonoBehaviour
                 if (GUI.Button(new Rect(13 * screen.x, 8.5f * screen.y, screen.x, 0.5f * screen.y), "Accept"))
                 {
                     dialogueNum++;
+                   
+                    questGiver.AcceptQuest();
                 }
                 if (GUI.Button(new Rect(14 * screen.x, 8.5f * screen.y, screen.x, 0.5f * screen.y), "Decline"))
                 {
                     dialogueNum = dialogueTxt.Length - 1;
+                    questGiver.DeclineQuest();
                 }
             }
             else

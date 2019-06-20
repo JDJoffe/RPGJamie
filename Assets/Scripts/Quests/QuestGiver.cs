@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class QuestUI
 {
     public PlayerQuest Player;
     public GameObject questWindow;
-    public Text nameText;
-    public Text descriptionText;
-    public Text expText;
-    public Text goldText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI expText;
+    public TextMeshProUGUI goldText;
 }
 
 public class QuestGiver : MonoBehaviour
@@ -24,8 +25,8 @@ public class QuestGiver : MonoBehaviour
 
         uI.nameText.text = quest.name;
         uI.descriptionText.text = quest.description;
-        uI.expText.text = quest.expReward.ToString();
-        uI.goldText.text = quest.goldReward.ToString();
+        uI.expText.text = ("Exp ") +quest.expReward.ToString();
+        uI.goldText.text = ("Gold ") + quest.goldReward.ToString();
     }
   public void AcceptQuest()
     {
@@ -35,5 +36,9 @@ public class QuestGiver : MonoBehaviour
             quest.state = QuestState.Accepted;
             uI.Player.quests.Add(quest);
         }
+    }
+    public void DeclineQuest()
+    {
+        uI.questWindow.SetActive(false);
     }
 }

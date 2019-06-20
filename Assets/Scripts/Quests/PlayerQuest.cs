@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerQuest : MonoBehaviour
 {
+    public int gold;
+    public int experience;
+    public Quest quest;
 
     public List<Quest> quests = new List<Quest>(); 
 
@@ -15,6 +18,8 @@ public class PlayerQuest : MonoBehaviour
             if (quests[i].goal.IsReached())
             {
                 quests[i].Complete();
+                gold = quest.goldReward;
+                experience = quest.expReward;
             }
         }
     }

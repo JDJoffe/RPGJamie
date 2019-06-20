@@ -23,12 +23,18 @@ public class Movement : MonoBehaviour
     public float jumpSpeed = 10;
     public float speed = 5;
     public float gravity = 20;
+    public bool menuOpen;
+    public QuestGiver questGiver;
+
+    public float delayTimer = 0.0f;
+   
+    private bool inputOnDelay = false;
     #endregion
     #region Start
     //charc is on this game object we need to get the character controller that is attached to it
     void Start()
     {
-
+        menuOpen = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -40,6 +46,12 @@ public class Movement : MonoBehaviour
     #region Update
     void Update()
     {
+        delayTimer -= Time.deltaTime;
+        Invoke("MenuToggle",4f);
+        delayTimer = 1;
+      
+        
+
         if (canMove)
         {
 
@@ -71,6 +83,29 @@ public class Movement : MonoBehaviour
             //we then tell the character Controller that it is moving in a direction timesed Time.deltaTime
             _characterController.Move(moveDirection * Time.deltaTime);
 
+        }
+    }
+
+  public void MenuToggle()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            
+            
+
+            if (menuOpen == true )
+            {
+                questGiver.uI.questWindow.SetActive(true);
+                menuOpen = false;
+            }
+
+            if (menuOpen == false )
+            {
+                questGiver.uI.questWindow.SetActive(false);
+                menuOpen = true;
+            }
+
+           
         }
     }
     #endregion
